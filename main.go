@@ -17,7 +17,8 @@ func main() {
 	})
 
     r.Post("/submit", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Println(r.FormValue("email"))
+        email := r.FormValue("email")
+        password := r.FormValue("password")
     })
 
     http.ListenAndServe(":8080", r)

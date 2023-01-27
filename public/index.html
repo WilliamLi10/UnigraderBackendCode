@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>My HTML Page</title>
   </head>
   <body>
-    <form action="/submit" method="POST">
-        <label for="email" style = "display: block">Email:</label>
-        <input type = "email" name = "email" style = "display: block">
-        <label for="password" name = "password" style = "display: block">Password:</label>
-        <input type = "password" name = "password" style = "display: block"> 
-        <input type="submit" value="Submit" style = "margin-top: 10px;">
+    <form id="myForm" method="POST">
+      <label for="email" style="display: block">Email:</label>
+      <input type="email" name="email" style="display: block" />
+      <label for="password" name="password" style="display: block"
+        >Password:</label
+      >
+      <input type="password" name="password" style="display: block" />
+      <input type="submit" value="Submit" style="margin-top: 10px" />
     </form>
+
+    <script>
+      var form = document.getElementById("myForm");
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var data = new FormData(form);
+        fetch("/submit", {
+          method: "POST",
+          body: data,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success:", data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      });
+    </script>
   </body>
 </html>
